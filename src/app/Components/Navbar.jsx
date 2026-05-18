@@ -1,11 +1,15 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '@/asset/logo.png'
 
 function Navigationpage () {
+
+ const [ clicked , setCliked] = useState('home')
+
   return (
-    <div>
+    <div className='sticky top-0 z-50'>
         <div className="navbar bg-base-100 shadow-sm ">
           <div className='w-11/12 mx-auto flex items-center'>
 <div className="navbar-start">
@@ -29,10 +33,10 @@ function Navigationpage () {
    
   </div>
   <div className="navbar-center hidden lg:flex">
-    <ul className="menu font-semibold  menu-horizontal px-1">
-      <li><Link href={'/'}>Home</Link></li>
-        <li><Link href={'/allappoinment'}>All Appointment</Link></li>
-        <li><Link href={'/'}>Dashboard</Link></li>
+    <ul className="menu font-semibold  gap-3  menu-horizontal px-1">
+      <li onClick={() => setCliked('home')} className={`${ clicked === 'home' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/'}>Home</Link></li>
+        <li onClick={() => setCliked('all')} className={`${ clicked === 'all' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/allappoinment'}>All Appointment</Link></li>
+        <li onClick={() => setCliked('dash')} className={`${ clicked === 'dash' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/'}>Dashboard</Link></li>
         
     </ul>
   </div>
