@@ -17,7 +17,7 @@ function Navigationpage () {
         tabIndex="-1"
         className="menu font-semibold menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
         <li><Link href={'/'}>Home</Link></li>
-        <li><Link href={'/'}>All Appointment</Link></li>
+        <li><Link href={'/allappoinment'}>All Appointment</Link></li>
         <li><Link href={'/'}>Dashboard</Link></li>
         
       </ul>
@@ -31,7 +31,7 @@ function Navigationpage () {
   <div className="navbar-center hidden lg:flex">
     <ul className="menu font-semibold  menu-horizontal px-1">
       <li><Link href={'/'}>Home</Link></li>
-        <li><Link href={'/'}>All Appointment</Link></li>
+        <li><Link href={'/allappoinment'}>All Appointment</Link></li>
         <li><Link href={'/'}>Dashboard</Link></li>
         
     </ul>
