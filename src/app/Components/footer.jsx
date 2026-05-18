@@ -14,7 +14,7 @@ function Footerpage () {
      <Image src={logo} alt="Logo image" width={200} height={200}/>
   </aside>
   <nav>
-    <h6 className="footer-title">Social</h6>
+    <h6 className="footer-title">Social Links</h6>
     <div className="grid grid-flow-col gap-4">
       <a>
         <svg
