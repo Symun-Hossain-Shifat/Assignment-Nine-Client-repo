@@ -1,9 +1,37 @@
+'use client'
+
+import { authClient } from '@/lib/auth-client'
 import Link from 'next/link'
+
 import React from 'react'
 import { FaEnvelope, FaGoogle, FaLock, FaUser } from 'react-icons/fa'
+import { PiBracketsCurlyBold } from 'react-icons/pi'
 
 
 function Signuppage () {
+  const Handlesignup = async (e) => {
+    e.preventDefault()
+    const FormData = e.target 
+    const email = FormData.Email.value 
+    const password = FormData.Password.value
+    const image = FormData.Image.value 
+    const name = FormData.Name.value 
+
+
+    const { data, error } = await authClient.signUp.email({
+    name: name, // required
+    email: email , // required
+    password: password , // required
+    image: image ,
+    callbackURL: "/signin",
+});
+
+if(data){
+  alert(`Registration Successfull`)
+}else if (error){
+  alert(`Registration Failed ${error}`)
+}
+  }
   return (
     <div>
       <section className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10">
@@ -18,7 +46,7 @@ function Signuppage () {
         </div>
 
         {/* Form */}
-        <form  className="space-y-4">
+        <form onSubmit={Handlesignup}  className="space-y-4">
           
           {/* Full Name */}
           <div>
@@ -49,6 +77,23 @@ function Signuppage () {
                 type="email"
                 required
                 placeholder="Enter your email"
+                className="w-full bg-transparent outline-none text-sm"
+              />
+            </div>
+          </div>
+
+          {/* Image Url */}
+          <div>
+            <label className="block text-sm font-medium mb-2">
+              Image URL
+            </label>
+            <div className="flex items-center border rounded-md px-3 py-2 bg-gray-50">
+              <PiBracketsCurlyBold className="text-gray-400 mr-2" />
+              <input
+              name="Image"
+                type="url"
+                placeholder="Enter your Image URL"
+                required
                 className="w-full bg-transparent outline-none text-sm"
               />
             </div>

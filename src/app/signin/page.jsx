@@ -1,9 +1,30 @@
+'use client'
+
+import { authClient } from '@/lib/auth-client'
 import Link from 'next/link'
 import React from 'react'
 import { FaEnvelope, FaGoogle, FaLock } from 'react-icons/fa'
 import { IoCheckboxOutline } from 'react-icons/io5'
 
 function Signinpage () {
+
+  const Handlesignin = async (e) => {
+    e.preventDefault()
+    const Formdata = e.target
+    const email = Formdata.Email.value
+    const password = Formdata.Password.value
+  const { data, error } = await authClient.signIn.email({
+    email: email , // required
+    password: password , // required
+    rememberMe: true,
+    callbackURL: "/",
+});
+if(data){
+  alert(`Login Successfull`)
+}else if (error){
+  alert(`Login Failed ${error}`)
+}
+  }
   return (
     <div>
        <section className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-10">
@@ -18,7 +39,7 @@ function Signinpage () {
         </div>
 
         {/* Form */}
-        <form className="space-y-5">
+        <form  onSubmit={Handlesignin}  className="space-y-5">
           
           {/* Email */}
           <div>

@@ -3,8 +3,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import logo from '@/asset/logo.png'
+import { authClient } from '@/lib/auth-client'
+
 
 function Navigationpage () {
+
+ const  Handlesignout = async () => {
+ await authClient.signOut();
+ }
+
+const { data: session } = authClient.useSession()
+const UserInfo = session?.user
+console.log(UserInfo)
+
+console.log(session)
 
  const [ clicked , setCliked] = useState('home')
 
@@ -41,7 +53,17 @@ function Navigationpage () {
     </ul>
   </div>
   <div className="navbar-end flex gap-3">
-    <Link href={'/signin'}>
+
+   {
+    session? 
+      
+    <button onClick={Handlesignout} className='btn btn-neutral btn-outline'>
+    Logout
+   </button>
+   
+     : 
+    <div className='flex gap-2'>
+      <Link href={'/signin'}>
     <button className='btn btn-neutral btn-outline'>
     Login
    </button>
@@ -51,6 +73,14 @@ function Navigationpage () {
     Register
    </button>
     </Link>
+    </div>
+    
+    
+   }
+
+
+
+
    
    
   </div>
