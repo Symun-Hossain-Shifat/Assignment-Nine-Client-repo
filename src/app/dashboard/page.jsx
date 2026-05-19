@@ -1,17 +1,20 @@
 
 
-import { Button } from '@heroui/react'
+
 import React from 'react'
-import { AiOutlineDelete } from 'react-icons/ai'
-import { RxUpdate } from 'react-icons/rx'
+
 import { DeleteBooking } from '../Components/DeleteBooking'
-import { h1 } from 'framer-motion/client'
+
+import { UpdateBooking } from '../Components/Update'
+
 
 async function Dashboardpage () {
+
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings`)
     const Datas = await res.json()
     console.log(Datas)
+    
 
    
   return (
@@ -71,7 +74,7 @@ async function Dashboardpage () {
 
                       <div className='flex items-center justify-between my-3'>
                        <DeleteBooking Data = {Data}></DeleteBooking>
-                        <Button className='rounded-none flex items-center gap-2' variant="secondary"> <RxUpdate /> Update Now</Button>
+                        <UpdateBooking Data = {Data} ></UpdateBooking>
                       </div>
                  </div>
             ))) }
