@@ -61,7 +61,7 @@ export function UpdateBooking ({Data}) {
               <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
                 <FaRegCalendarAlt size={20} />
               </Modal.Icon>
-              <Modal.Heading>Book Appoinment</Modal.Heading>
+              <Modal.Heading>Update Appoinment</Modal.Heading>
               <p className="mt-1.5 text-sm leading-5 text-muted">
                 Fill out the form below and we'll get back to you. 
               </p>
@@ -108,7 +108,7 @@ export function UpdateBooking ({Data}) {
               <Button slot="close" variant="secondary">
                 Cancel
               </Button>
-              <Button type="submit" slot= 'close'>Confirm Booking</Button>
+              <Button type="submit" slot= 'close'>Save</Button>
             </Modal.Footer>
                 </form>
               </Surface>

@@ -16,10 +16,43 @@ function Navigationpage () {
 const { data: session } = authClient.useSession()
 const UserInfo = session?.user
 // console.log(UserInfo)
-
-// console.log(session)
-
  const [ clicked , setCliked] = useState('home')
+// console.log(session)
+const Table = <ul className="menu font-semibold  gap-3  menu-horizontal px-1">
+      <li onClick={() => setCliked('home')} className={`${ clicked === 'home' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/'}>Home</Link></li>
+        <li onClick={() => setCliked('all')} className={`${ clicked === 'all' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/allappoinment'}>All Appointment</Link></li>
+        <li onClick={() => setCliked('dash')} className={`${ clicked === 'dash' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/dashboard'}>Dashboard</Link></li>
+        
+    </ul>
+
+    const LoginTable = <ul className="menu font-semibold  gap-3  menu-horizontal px-1">
+      <li onClick={() => setCliked('home')} className={`${ clicked === 'home' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/'}>Home</Link></li>
+        <li onClick={() => setCliked('all')} className={`${ clicked === 'all' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/allappoinment'}>All Appointment</Link></li>
+        <li onClick={() => setCliked('dash')} className={`${ clicked === 'dash' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/dashboard'}>Dashboard</Link></li>
+        <li onClick={() => setCliked('profile')} className={`${ clicked === 'profile' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/profile'}>Profile</Link></li>
+        
+    </ul>
+
+    const sidetable = <ul
+        tabIndex="-1"
+        className="menu font-semibold menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <li><Link href={'/'}>Home</Link></li>
+        <li><Link href={'/allappoinment'}>All Appointment</Link></li>
+        <li><Link href={'/dashboard'}>Dashboard</Link></li>
+        
+      </ul>
+
+      const loginsidetable = <ul
+        tabIndex="-1"
+        className="menu font-semibold menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <li><Link href={'/'}>Home</Link></li>
+        <li><Link href={'/allappoinment'}>All Appointment</Link></li>
+        <li><Link href={'/dashboard'}>Dashboard</Link></li>
+        <li><Link href={'/profile'}>Profile</Link></li>
+        
+      </ul>
+
+
 
   return (
     <div className='sticky top-0 z-50'>
@@ -30,14 +63,7 @@ const UserInfo = session?.user
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
       </div>
-      <ul
-        tabIndex="-1"
-        className="menu font-semibold menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li><Link href={'/'}>Home</Link></li>
-        <li><Link href={'/allappoinment'}>All Appointment</Link></li>
-        <li><Link href={'/dashboard'}>Dashboard</Link></li>
-        
-      </ul>
+      {session ? loginsidetable : sidetable }
     </div>
     <div className='flex gap-4 items-center'>
      <Image src={logo} alt="Logo image" className='border' width={70} height={70}/>
@@ -46,19 +72,14 @@ const UserInfo = session?.user
    
   </div>
   <div className="navbar-center hidden lg:flex">
-    <ul className="menu font-semibold  gap-3  menu-horizontal px-1">
-      <li onClick={() => setCliked('home')} className={`${ clicked === 'home' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/'}>Home</Link></li>
-        <li onClick={() => setCliked('all')} className={`${ clicked === 'all' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/allappoinment'}>All Appointment</Link></li>
-        <li onClick={() => setCliked('dash')} className={`${ clicked === 'dash' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/dashboard'}>Dashboard</Link></li>
-        
-    </ul>
+    {session ?  LoginTable : Table }
   </div>
   <div className="navbar-end flex gap-3">
 
    {
     session? 
     <div className='flex gap-2'>
-         <Avatar>
+         <Avatar >
         <Avatar.Image
          alt="User Image " 
          src= {UserInfo?.image} 
