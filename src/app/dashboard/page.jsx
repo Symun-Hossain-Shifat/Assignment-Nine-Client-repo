@@ -5,6 +5,7 @@ import React from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
 import { RxUpdate } from 'react-icons/rx'
 import { DeleteBooking } from '../Components/DeleteBooking'
+import { h1 } from 'framer-motion/client'
 
 async function Dashboardpage () {
 
@@ -17,9 +18,8 @@ async function Dashboardpage () {
     <div className='w-10/12 mx-auto p-3 my-20'>
       
         <h1 className='text-3xl text-left font-semibold my-5'>My Bookings</h1>
-        <div className='  grid grid-cols-1 md:grid-cols-2 gap-10'>
-         
-            {Datas.map( Data => (
+          <div className= {`${Datas.length < 1? '' : 'grid grid-cols-1 md:grid-cols-2 gap-4 p-5'} `}>
+            {Datas.length < 1? (<h1 className='text-center py-20 text-3xl font-bold'>No Booking Found</h1>) :  ( Datas.map( Data => (
                  <div className='card' key={Data._id}>
                            {/* Header */}
                            <div className='flex gap-2.5 border-b-2 border-gray-200 py-5'>
@@ -74,9 +74,12 @@ async function Dashboardpage () {
                         <Button className='rounded-none flex items-center gap-2' variant="secondary"> <RxUpdate /> Update Now</Button>
                       </div>
                  </div>
-            ))}
+            ))) }
+          </div>
+        
+            
         </div>
-    </div>
+    
   )
 }
 
