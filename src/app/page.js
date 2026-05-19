@@ -6,7 +6,7 @@ import Feedbackpage from "./Components/Feedback";
 
 export default function Home() {
   return (
-    <div >
+    <div  className=" space-y-50">
      <Bannerpage></Bannerpage>
      <Featuredpage></Featuredpage>
      <Feedbackpage></Feedbackpage>

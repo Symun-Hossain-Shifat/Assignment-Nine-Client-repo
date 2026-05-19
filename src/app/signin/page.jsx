@@ -19,12 +19,27 @@ function Signinpage () {
     rememberMe: true,
     callbackURL: "/",
 });
+console.log(error)
 if(data){
   alert(`Login Successfull`)
 }else if (error){
-  alert(`Login Failed ${error}`)
+  alert(`Login Failed ! ${error?.message}`)
 }
   }
+
+  const Googlesignin = async () => {
+          const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  
+    if(data){
+    alert(`Registration Successfull`)
+    router.push('/signin')
+  }else{
+    alert(`Registration Failed`)
+  }
+    }
+
   return (
     <div>
        <section className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-10">
@@ -99,7 +114,7 @@ if(data){
           </div>
 
           {/* Google */}
-          <button  className="w-full border py-2.5 rounded-md flex items-center justify-center gap-2 hover:bg-gray-50 transition">
+          <button onClick={Googlesignin} className="w-full border py-2.5 rounded-md flex items-center justify-center gap-2 hover:bg-gray-50 transition">
             <FaGoogle className="text-red-500" />
             <span className="text-sm">Sign Up With Google</span>
           </button>

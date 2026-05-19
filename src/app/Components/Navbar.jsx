@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import logo from '@/asset/logo.png'
 import { authClient } from '@/lib/auth-client'
+import { Avatar } from '@heroui/react'
 
 
 function Navigationpage () {
@@ -14,9 +15,9 @@ function Navigationpage () {
 
 const { data: session } = authClient.useSession()
 const UserInfo = session?.user
-console.log(UserInfo)
+// console.log(UserInfo)
 
-console.log(session)
+// console.log(session)
 
  const [ clicked , setCliked] = useState('home')
 
@@ -34,7 +35,7 @@ console.log(session)
         className="menu font-semibold menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
         <li><Link href={'/'}>Home</Link></li>
         <li><Link href={'/allappoinment'}>All Appointment</Link></li>
-        <li><Link href={'/'}>Dashboard</Link></li>
+        <li><Link href={'/dashboard'}>Dashboard</Link></li>
         
       </ul>
     </div>
@@ -48,7 +49,7 @@ console.log(session)
     <ul className="menu font-semibold  gap-3  menu-horizontal px-1">
       <li onClick={() => setCliked('home')} className={`${ clicked === 'home' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/'}>Home</Link></li>
         <li onClick={() => setCliked('all')} className={`${ clicked === 'all' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/allappoinment'}>All Appointment</Link></li>
-        <li onClick={() => setCliked('dash')} className={`${ clicked === 'dash' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/'}>Dashboard</Link></li>
+        <li onClick={() => setCliked('dash')} className={`${ clicked === 'dash' ? 'border-red-600 , border-b-2' : ''}`}><Link href={'/dashboard'}>Dashboard</Link></li>
         
     </ul>
   </div>
@@ -56,10 +57,20 @@ console.log(session)
 
    {
     session? 
-      
+    <div className='flex gap-2'>
+         <Avatar>
+        <Avatar.Image
+         alt="User Image " 
+         src= {UserInfo?.image} 
+         referrerPolicy = 'no-referrer'
+         />
+        <Avatar.Fallback>{UserInfo?.name?.slice(0,1)}</Avatar.Fallback>
+      </Avatar> 
     <button onClick={Handlesignout} className='btn btn-neutral btn-outline'>
     Logout
    </button>
+    </div>
+     
    
      : 
     <div className='flex gap-2'>

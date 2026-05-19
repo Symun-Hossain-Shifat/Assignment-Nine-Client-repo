@@ -14,10 +14,10 @@ async function Detailspage ({params}) {
     
 
 
-    const res = await fetch(`${process.env.SERVER_PORT}/allappoinmets/${id}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allappoinmets/${id}`)
     const Data = await res.json()
     const time = Data.availability
-    console.log(Data)
+    // console.log(Data)
   return (
     <div className='container mx-auto my-10'>
         <div className='flex gap-2 items-center my-5 text-blue-600'>
@@ -103,7 +103,7 @@ async function Detailspage ({params}) {
   
  
   
-  <WithForm></WithForm>
+  <WithForm Data = {Data}></WithForm>
   
  
 

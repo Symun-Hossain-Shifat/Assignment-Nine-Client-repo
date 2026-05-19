@@ -3,9 +3,9 @@ import React from 'react'
 
 async function Allappoinmentpage () {
 
-const res = await fetch(`${process.env.SERVER_PORT}/allappoinmets`)
+const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allappoinmets`)
 const Datas = await res.json()
-console.log(Datas)
+// console.log(Datas)
   return (
     <div className='container mx-auto py-10'>
        <h2 className='text-2xl font-semibold'>All Appoinments</h2> 

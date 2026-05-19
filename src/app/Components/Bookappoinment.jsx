@@ -1,10 +1,45 @@
 "use client";
 
-import {Envelope} from "@gravity-ui/icons";
+import { authClient } from "@/lib/auth-client";
+
 import {Button, FieldError, Input,  Modal, Surface, TextField} from "@heroui/react";
 import {Label} from "@heroui/react";
 import { FaRegCalendarAlt } from "react-icons/fa";
-export function WithForm() {
+export function WithForm({Data}) {
+  // console.log(Data)
+
+  
+  const { data: session } = authClient.useSession()
+  const UserInfo = session?.user
+  // console.log(UserInfo)
+
+
+  const Getbookingdata =  async (e) => {
+  e.preventDefault()
+
+  const FormData = e.target
+  const email = FormData.Email.value
+  const doctorname = FormData.Doctor.value 
+  const patientname = FormData.Patient.value 
+  const phone = FormData.Phone.value
+  const gender = FormData.Gender.value 
+  const date = FormData.Date.value 
+  const time = FormData.Time.value
+  const BookingData = {email , doctorname , patientname , phone , gender , date , time }
+  // console.log(BookingData)
+console.log(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings`)
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings` , {
+    method : 'POST', 
+    headers : {
+      'content-type' : 'application/json'
+    },
+    body : JSON.stringify(BookingData)
+  })
+  const Data = await res.json();
+  console.log(Data)
+  }
+
   return (
     <Modal>
       <Button className='rounded-none my-3 ' variant="outline">Book Appointment Now</Button>
@@ -25,38 +60,38 @@ export function WithForm() {
             </Modal.Header>
             <Modal.Body className="p-6">
               <Surface variant="default">
-                <form className="flex flex-col gap-4">
-                     <TextField className="w-full" name="email" type="email" isRequired>
+                <form onSubmit={Getbookingdata} className="flex flex-col gap-4">
+                     <TextField  className="w-full" name="Email" type="email" isRequired>
                     <Label>User Email </Label>
-                    <Input placeholder="Enter your email" />
+                    <Input   value={UserInfo?.email}  readOnly />
                   </TextField>
-                  <TextField className="w-full" name="name" type="text" isRequired>
+                  <TextField   className="w-full" name="Doctor" type="text" isRequired>
                     <Label>Doctor Name</Label>
-                    <Input placeholder="Enter your name" />
+                    <Input value={Data.name} readOnly />
                   </TextField>
                  
-                  <TextField className="w-full" name="name" type="text" isRequired>
+                  <TextField defaultValue={'Jhon Doe'} className="w-full" name="Patient" type="text" isRequired>
                     <Label>Patient Name</Label>
                     <Input placeholder="Enter your name" />
                   </TextField>
 
-                  <TextField className="w-full" name="name" type="text" isRequired>
+                  <TextField defaultValue={'Male'} className="w-full" name="Gender" type="text" isRequired>
                     <Label>Gender</Label>
                     <Input placeholder="Enter your name" />
                   </TextField>
                    
-                  <TextField className="w-full" name="phone" type="tel" isRequired>
+                  <TextField defaultValue={'01619050765'} className="w-full" name="Phone" type="tel" isRequired>
                     <Label>Phone</Label>
                     <Input placeholder="Enter your phone number" />
                   </TextField>
 
-                   <TextField name="departureDate" type="date" isRequired>
+                   <TextField  name="Date" type="date" isRequired>
                   <Label>Appointment Date</Label>
                   <Input type="date" className="rounded-2xl" />
                   <FieldError />
                 </TextField>
                   
-                   <TextField name="departureDate" isRequired>
+                   <TextField defaultValue="10:34 AM" name="Time" isRequired>
                   <Label>Appointment Time</Label>
                   <Input className="rounded-2xl" />
                   <FieldError />
@@ -65,7 +100,7 @@ export function WithForm() {
               <Button slot="close" variant="secondary">
                 Cancel
               </Button>
-              <Button slot="close">Confirm Booking</Button>
+              <Button type="submit" slot="close">Confirm Booking</Button>
             </Modal.Footer>
                 </form>
               </Surface>

@@ -7,7 +7,7 @@ import { PiHospital } from 'react-icons/pi'
 import { SlCalender } from 'react-icons/sl'
 
 async function Featuredpage () {
-    const res = await fetch(`${process.env.SERVER_PORT}/featured`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/featured`)
 const Datas = await res.json()
 // console.log(Datas)
   return (
@@ -90,8 +90,8 @@ const Datas = await res.json()
                
             </div>
           
-          <Link href={`/allappoinment/${Data._id}`}>
-      <button className='btn btn-primary'>Veiw Details</button>
+          <Link  href={`/allappoinment/${Data._id}`}>
+      <button className='btn my-5 btn-primary'>Veiw Details</button>
       </Link>
           
           

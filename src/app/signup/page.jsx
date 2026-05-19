@@ -1,7 +1,10 @@
 'use client'
 
 import { authClient } from '@/lib/auth-client'
+
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+
 
 import React from 'react'
 import { FaEnvelope, FaGoogle, FaLock, FaUser } from 'react-icons/fa'
@@ -9,6 +12,8 @@ import { PiBracketsCurlyBold } from 'react-icons/pi'
 
 
 function Signuppage () {
+
+  const router = useRouter()
   const Handlesignup = async (e) => {
     e.preventDefault()
     const FormData = e.target 
@@ -28,8 +33,23 @@ function Signuppage () {
 
 if(data){
   alert(`Registration Successfull`)
+  router.push('/signin')
 }else if (error){
   alert(`Registration Failed ${error}`)
+}
+  }
+
+
+  const Googlesignin = async () => {
+        const data = await authClient.signIn.social({
+    provider: "google",
+  });
+
+  if(data){
+  alert(`Registration Successfull`)
+  router.push('/signin')
+}else{
+  alert(`Registration Failed`)
 }
   }
   return (
@@ -131,7 +151,7 @@ if(data){
           </div>
 
           {/* Google Button */}
-          <button className="w-full border rounded-md py-2.5 flex items-center justify-center gap-2 hover:bg-gray-50 transition">
+          <button onClick={Googlesignin} className="w-full border rounded-md py-2.5 flex items-center justify-center gap-2 hover:bg-gray-50 transition">
             <FaGoogle className="text-red-500" />
             <span className="text-sm">Sign Up With Google</span>
           </button>
