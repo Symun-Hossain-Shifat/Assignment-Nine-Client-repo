@@ -1,9 +1,19 @@
+import { auth } from '@/lib/auth'
+import { headers } from 'next/headers'
 import Link from 'next/link'
 import React from 'react'
 
 async function Allappoinmentpage () {
+const {token} = await  auth.api.getToken ({
+  headers : await headers()
+})
 
-const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allappoinmets`)
+console.log(token)
+const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allappoinmets` , {
+  headers : {
+    authorization : `Bearer ${token}`
+  }
+})
 const Datas = await res.json()
 // console.log(Datas)
   return (
