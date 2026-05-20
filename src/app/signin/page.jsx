@@ -2,12 +2,44 @@
 
 import { authClient } from '@/lib/auth-client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { FaEnvelope, FaGoogle, FaLock } from 'react-icons/fa'
 import { IoCheckboxOutline } from 'react-icons/io5'
 import { toast } from 'react-toastify'
 
 function Signinpage () {
+
+
+const [password , setPassword] = useState('')
+const [error , setError ] = useState('')
+
+const validatepass = (value) => {
+  const regex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/ ;
+  return regex.test(value)
+}
+
+const Handlepaschage = (e) => {
+ const value = e.target.value 
+ setPassword(value)
+
+ if(value.length === 0){
+  setError('')
+  return
+}
+if(!validatepass(value)){
+  setError('Password must be 1 uppercase , 1 lowercase $ minimum 6 character')
+}else {
+  setError('')
+}
+
+
+} 
+
+
+
+
+
+
 
   const Handlesignin = async (e) => {
     e.preventDefault()
@@ -78,11 +110,16 @@ if(data){
               <input
               name="Password"
                 type="password"
+                value={password}
+                onChange={Handlepaschage}
                 placeholder="Enter your password"
                 className="w-full outline-none bg-transparent text-sm"
               />
+            
             </div>
+            {error && <p className='text-red-500  text-sm'>{error}</p>}
           </div>
+            
 
           {/* Remember + Forgot */}
           <div className="flex items-center justify-between text-sm">

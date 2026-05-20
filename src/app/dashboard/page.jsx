@@ -18,7 +18,7 @@ async function Dashboardpage () {
 
    
   return (
-    <div className='w-10/12 mx-auto p-3 my-20'>
+    <div className=' w-11/12 md:w-10/12 mx-auto p-3 my-20'>
       
         <h1 className='text-3xl text-left font-semibold my-5'>My Bookings</h1>
           <div className= {`${Datas.length < 1? '' : 'grid grid-cols-1 md:grid-cols-2 gap-4 p-5'} `}>

@@ -43,17 +43,17 @@ const Profilepage = () => {
 
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen  w-11/12 md:w-10/12 mx-auto bg-gray-50 p-4 md:p-8">
+      <div className="">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900">My Profile</h1>
           <p className="text-gray-600 mt-1">Manage your account settings </p>
         </div>
 
-        <div className=" w-full md:w-10/12 mx-auto">
+        <div className=" ">
           {/* Profile Card */}
-          <div className="lg:col-span-5 w-8/12 mx-auto bg-white rounded-3xl shadow-sm border border-gray-100 p-8 flex flex-col">
+          <div className="lg:col-span-5 md:w-8/12 mx-auto bg-white rounded-3xl shadow-sm border border-gray-100 p-8 flex flex-col">
             <div className="flex flex-col items-center text-center mb-8">
               {/* Avatar */}
               <div className="relative mb-6">

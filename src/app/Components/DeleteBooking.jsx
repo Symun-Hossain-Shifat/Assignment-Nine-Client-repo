@@ -25,7 +25,9 @@ export function DeleteBooking ({Data}) {
   return (
     <AlertDialog>
       <Button   className='rounded-none flex items-center gap-2' variant="danger"> <AiOutlineDelete /> Delete</Button>
-      <AlertDialog.Backdrop>
+      <AlertDialog.Backdrop
+       className="bg-linear-to-t from-black/80 via-black/40 to-transparent dark:from-zinc-800/80 dark:via-zinc-800/40"
+        variant="blur">
         <AlertDialog.Container>
           <AlertDialog.Dialog className="sm:max-w-[400px]">
             <AlertDialog.CloseTrigger />

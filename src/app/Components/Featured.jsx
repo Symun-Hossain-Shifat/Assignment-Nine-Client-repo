@@ -12,14 +12,17 @@ const Datas = await res.json()
 // console.log(Datas)
   return (
     <div  className='container mx-auto text-center '>
-     <h3 className='text-2xl py-3 text-red-600 w-2/10 mx-auto font-semibold my-5 border-b-2'>Top Rated Doctors</h3>
+    <div className='text-center mb-8 space-y-4 w-10/12 mx-auto'>
+            <p className='font-semibold text-2xl text-red-700'>Top  Rated  Doctor</p>
+             <h1 className=' text-7xl font-bold '>Connect with top healthcare professionals for quality care !</h1>
+           </div>   
       {Datas.map(Data => (
-         <div key={Data._id} className="card  my-2  text-left lg:card-side bg-base-100  shadow-sm">
+         <div key={Data._id} className="card my-2  text-left lg:card-side bg-base-100  shadow-sm">
           <figure>
             <img
               src={Data.image}
               alt="Doctor Picture"
-             className='w-100 object-cover '
+             className=' w-80 mx-auto md:w-100 object-cover '
               
               />
           </figure>

@@ -6,13 +6,40 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 
-import React from 'react'
+import React, { useState } from 'react'
 import { FaEnvelope, FaGoogle, FaLock, FaUser } from 'react-icons/fa'
 import { PiBracketsCurlyBold } from 'react-icons/pi'
 import { toast } from 'react-toastify'
 
 
 function Signuppage () {
+
+
+
+  const [password , setPassword] = useState('')
+  const [error , setError ] = useState('')
+  
+  const validatepass = (value) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/ ;
+    return regex.test(value)
+  }
+  
+  const Handlepaschage = (e) => {
+   const value = e.target.value 
+   setPassword(value)
+  
+   if(value.length === 0){
+    setError('')
+    return
+  }
+  if(!validatepass(value)){
+    setError('Password must be 1 uppercase , 1 lowercase $ minimum 6 character')
+  }else {
+    setError('')
+  }
+  
+  
+  } 
 
   const router = useRouter()
   const Handlesignup = async (e) => {
@@ -33,7 +60,7 @@ function Signuppage () {
 });
 
 if(data){
- 
+  await authClient.signOut();
   router.push('/signin')
 }else if (error){
   toast.warning(`Registration Failed ! ${error.message}`)
@@ -121,23 +148,25 @@ if(data){
           </div>
 
           {/* Password */}
-          <div>
-            <label className="block text-sm font-medium mb-2">
-              Password
-            </label>
-            <div className="flex items-center border rounded-md px-3 py-2 bg-gray-50">
-              <FaLock className="text-gray-400 mr-2" />
-              <input
-            
-                type="password"
-                name="Password"
-                required
-                placeholder="Create a password"
-                className="w-full bg-transparent outline-none text-sm"
-              />
-            </div>
-          </div>
-
+                  <div>
+                    <label className="block text-sm font-medium mb-2">
+                      Password
+                    </label>
+                    <div className="flex items-center border rounded-md px-3 py-2 bg-gray-50">
+                      <FaLock className="text-gray-400 mr-2" />
+                      <input
+                      name="Password"
+                        type="password"
+                        value={password}
+                        onChange={Handlepaschage}
+                        placeholder="Enter your password"
+                        className="w-full outline-none bg-transparent text-sm"
+                      />
+                    
+                    </div>
+                    {error && <p className='text-red-500  text-sm'>{error}</p>}
+                  </div>
+                    
           {/* Create Button */}
           <button className="w-full bg-cyan-500 hover:bg-cyan-600 text-white py-2.5 rounded-md transition">
             Create Account

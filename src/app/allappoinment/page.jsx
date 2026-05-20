@@ -7,12 +7,12 @@ const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allappoinmets`)
 const Datas = await res.json()
 // console.log(Datas)
   return (
-    <div className='container mx-auto py-10'>
+    <div className=' py-10 w-8/10  mx-auto md:w-10/12'>
        <h2 className='text-2xl font-semibold'>All Appoinments</h2> 
        <div className='grid grid-cols-1 md:grid-cols-3 my-10 gap-5'>
           {
           Datas.map(Data => (
-            <div key={Data._id} className="card bg-base-100 w-96 shadow-sm">
+            <div key={Data._id} className="card  bg-base-100   shadow-sm">
   <figure>
     <img
       src={Data.image}

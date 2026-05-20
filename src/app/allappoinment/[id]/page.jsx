@@ -3,7 +3,7 @@ import { WithForm } from '@/app/Components/Bookappoinment'
 import Link from 'next/link'
 import React from 'react'
 import { FaUser } from 'react-icons/fa'
-import { IoMdArrowBack } from 'react-icons/io'
+import { IoIosArrowBack} from 'react-icons/io'
 import { IoLocationSharp } from 'react-icons/io5'
 import { MdOutlineAttachMoney } from 'react-icons/md'
 import { PiHospital } from 'react-icons/pi'
@@ -19,13 +19,14 @@ async function Detailspage ({params}) {
     const time = Data.availability
     // console.log(Data)
   return (
-    <div className='container mx-auto my-10'>
-        <div className='flex gap-2 items-center my-5 text-blue-600'>
-            <IoMdArrowBack />
-        <Link href={'/allappoinment'}>  Back All Appoinment</Link>
+    <div className='w-10/12 mx-auto my-10'>
+        <div>
+           <div className='flex gap-2 items-center my-5'>
+          
+        <Link href={'/allappoinment'}> <IoIosArrowBack size={50} /></Link>
         </div>
         
-        <div className="card lg:card-side bg-base-100  shadow-sm">
+        <div className="card  lg:card-side bg-base-100  shadow-sm">
   <figure>
     <img
       src={Data.image}
@@ -118,6 +119,8 @@ async function Detailspage ({params}) {
 
   </div>
 </div>
+        </div>
+        
     </div>
   )
 }

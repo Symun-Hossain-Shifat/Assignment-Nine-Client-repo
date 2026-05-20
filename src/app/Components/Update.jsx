@@ -110,7 +110,7 @@ export function UpdateBooking ({Data}) {
                   <TextField  className="w-full"  >
                     <Label>Patient Name</Label>
                     <Input value = {formdata.patient} 
-                      onValueChage ={(e) => {
+                      onChange ={(e) => {
                        setFormdata({
                         ...formdata , patient : e.target.value
                        })
@@ -121,7 +121,7 @@ export function UpdateBooking ({Data}) {
                   <TextField  className="w-full"  >
                     <Label>Gender</Label>
                     <Input  value = {formdata.gender} 
-                     onValueChage ={(e) => {
+                     onChange ={(e) => {
                        setFormdata({
                         ...formdata , gender : e.target.value
                        })
@@ -131,7 +131,7 @@ export function UpdateBooking ({Data}) {
                   <TextField  className="w-full" >
                     <Label>Phone</Label>
                     <Input  value = {formdata.phone} 
-                     onValueChage ={(e) => {
+                     onChange ={(e) => {
                        setFormdata({
                         ...formdata , phone : e.target.value
                        })
@@ -141,7 +141,7 @@ export function UpdateBooking ({Data}) {
                    <TextField    >
                   <Label>Appointment Date</Label>
                   <Input  value = {formdata.date} 
-                     onValueChage ={(e) => {
+                     onChange ={(e) => {
                        setFormdata({
                         ...formdata , date : e.target.value
                        })
@@ -152,7 +152,7 @@ export function UpdateBooking ({Data}) {
                    <TextField   >
                   <Label>Appointment Time</Label>
                   <Input  value = {formdata.time} 
-                     onValueChage ={(e) => {
+                     onChange ={(e) => {
                        setFormdata({
                         ...formdata , time : e.target.value
                        })

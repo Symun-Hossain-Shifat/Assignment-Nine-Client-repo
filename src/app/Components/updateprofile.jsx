@@ -3,10 +3,13 @@
 import { authClient } from "@/lib/auth-client";
 
 import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react";
+import { useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { toast } from "react-toastify";
 
 export function Updateprofilepage () {
+
+  const [open , setOpen] = useState(false)
 
     const Updateprofile = async (e) => {
         e.preventDefault()
@@ -21,14 +24,15 @@ export function Updateprofilepage () {
                     })
 
                     toast.success(' “Profile updated successfully!”')
+                    setOpen(false)
         }catch(error){
           console.log(error)
         }
 
     }
   return (
-    <Modal>
-      <Button className = ' w-full flex items-center gap-3' variant="danger-soft"> <MdEdit /> Edit Profile</Button>
+    <Modal  isOpen = {open} onOpenChange={setOpen}> 
+      <Button className = ' w-full flex items-center gap-3' variant="danger-soft"> <MdEdit /> Update Profile</Button>
       <Modal.Backdrop>
         <Modal.Container placement="auto">
           <Modal.Dialog className="sm:max-w-md">
@@ -45,21 +49,21 @@ export function Updateprofilepage () {
             <Modal.Body className="p-6">
               <Surface variant="default">
                 <form onSubmit={Updateprofile} className="flex flex-col gap-4">
-                  <TextField className="w-full" name="Name" type="text">
+                  <TextField isRequired className="w-full" name="Name" type="text">
                     <Label>Name</Label>
-                    <Input placeholder="Enter your name" />
+                    <Input placeholder="Enter your name"/>
                   </TextField>
                 
                   
-                  <TextField type="url" className="w-full" name="Image" >
+                  <TextField isRequired type="url" className="w-full" name="Image" >
                     <Label>Image URL</Label>
-                    <Input placeholder="Enter your Image URL" />
+                    <Input placeholder="Enter your Image URL"  />
                   </TextField>
                   <Modal.Footer>
               <Button slot="close" variant="secondary">
                 Cancel
               </Button>
-              <Button type="submit" slot="close">Save</Button>
+              <Button type="submit" onClick={() => setOpen(true)}>Save</Button>
             </Modal.Footer>
                 </form>
               </Surface>
