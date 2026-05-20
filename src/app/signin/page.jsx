@@ -5,6 +5,7 @@ import Link from 'next/link'
 import React from 'react'
 import { FaEnvelope, FaGoogle, FaLock } from 'react-icons/fa'
 import { IoCheckboxOutline } from 'react-icons/io5'
+import { toast } from 'react-toastify'
 
 function Signinpage () {
 
@@ -21,9 +22,9 @@ function Signinpage () {
 });
 console.log(error)
 if(data){
-  alert(`Login Successfull`)
+  router.push('/')
 }else if (error){
-  alert(`Login Failed ! ${error?.message}`)
+   toast.warning(`Login Failed ! ${error.message}`)
 }
   }
 
@@ -32,12 +33,7 @@ if(data){
       provider: "google",
     });
   
-    if(data){
-    alert(`Registration Successfull`)
-    router.push('/signin')
-  }else{
-    alert(`Registration Failed`)
-  }
+    
     }
 
   return (

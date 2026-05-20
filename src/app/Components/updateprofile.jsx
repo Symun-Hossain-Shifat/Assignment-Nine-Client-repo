@@ -4,6 +4,7 @@ import { authClient } from "@/lib/auth-client";
 
 import {Button, Input, Label, Modal, Surface, TextField} from "@heroui/react";
 import { MdEdit } from "react-icons/md";
+import { toast } from "react-toastify";
 
 export function Updateprofilepage () {
 
@@ -12,10 +13,18 @@ export function Updateprofilepage () {
         const Formdata = e.target 
         const name = Formdata.Name.value 
         const image = Formdata.Image.value 
-         await authClient.updateUser({
-   name ,
-   image
-})
+
+        try{
+                   await authClient.updateUser({
+                 name ,
+                 image
+                    })
+
+                    toast.success(' “Profile updated successfully!”')
+        }catch(error){
+          console.log(error)
+        }
+
     }
   return (
     <Modal>

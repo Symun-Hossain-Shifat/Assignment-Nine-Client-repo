@@ -13,7 +13,7 @@ async function Dashboardpage () {
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings`)
     const Datas = await res.json()
-    console.log(Datas)
+    // console.log(Datas)
     
 
    

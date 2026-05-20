@@ -5,18 +5,47 @@ import { authClient } from "@/lib/auth-client";
 import {Button, FieldError, Input,  Modal, Surface, TextField} from "@heroui/react";
 import {Label} from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { RxUpdate } from "react-icons/rx";
+import { toast } from "react-toastify";
 export function UpdateBooking ({Data}) {
+
   // console.log(Data)
   const router = useRouter()
   
   const { data: session } = authClient.useSession()
   const UserInfo = session?.user
   // console.log(UserInfo)
+ console.log(Data)
 
+ 
+  const [formdata , setFormdata] = useState({
+    email : UserInfo?.email  || '', 
+    doctor : Data?.doctorname || '' ,
+    time : Data?.time || '' ,
+    patient : Data?.patientname || '' ,
+    gender : Data?.gender || '' ,
+    date : Data?.date || '' ,
+    phone : Data?.phone || '' ,
+
+
+  })
+
+  useEffect (() => {
+    setFormdata({
+       email : UserInfo?.email  || '', 
+    doctor : Data?.doctorname || '' ,
+    time : Data?.time || '' ,
+    patient : Data?.patientname || '' ,
+    gender : Data?.gender || '' ,
+    date : Data?.date || '' ,
+    phone : Data?.phone || '' ,
+
+    })
+  },[UserInfo , Data])
 
   const Updatebookingdata =  async (e) => {
   e.preventDefault()
@@ -30,7 +59,7 @@ export function UpdateBooking ({Data}) {
   const date = FormData.Date.value 
   const time = FormData.Time.value
   const BookingData = {email , doctorname , patientname , phone , gender , date , time }
-  console.log(BookingData)
+  
   
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings/${Data._id}` , {
@@ -41,9 +70,9 @@ export function UpdateBooking ({Data}) {
     body : JSON.stringify(BookingData)
   })
   const result = await res.json()
-  console.log(result)
+  // console.log(result)
   if(result){
-    alert('Update Successfull')
+    toast.success('“Appointment updated successfully!”')
     router.refresh()
   }
   }
@@ -69,39 +98,65 @@ export function UpdateBooking ({Data}) {
             <Modal.Body className="p-6">
               <Surface variant="default">
                 <form onSubmit={Updatebookingdata} className="flex flex-col gap-4">
-                     <TextField defaultValue = {UserInfo?.email}  className="w-full" name="Email" type="email" isRequired>
+                     <TextField   className="w-full"  >
                     <Label>User Email </Label>
-                    <Input   />
+                    <Input value = {formdata.email}  name="Email" type="email" readOnly />
                   </TextField>
-                  <TextField  defaultValue = {Data.doctorname} className="w-full" name="Doctor" type="text" isRequired>
-                    <Label>Doctor Name</Label>
-                    <Input  />
+                  <TextField  className="w-full" >
+                    <Label >Doctor Name</Label>
+                    <Input name="Doctor" type="text"   value ={formdata.doctor}  readOnly />
                   </TextField>
                  
-                  <TextField defaultValue = {Data.patientname} className="w-full" name="Patient" type="text" isRequired>
+                  <TextField  className="w-full"  >
                     <Label>Patient Name</Label>
-                    <Input placeholder="Enter your name" />
+                    <Input value = {formdata.patient} 
+                      onValueChage ={(e) => {
+                       setFormdata({
+                        ...formdata , patient : e.target.value
+                       })
+                     }}
+                     name="Patient" type="text" />
                   </TextField>
 
-                  <TextField defaultValue = {Data.gender} className="w-full" name="Gender" type="text" isRequired>
+                  <TextField  className="w-full"  >
                     <Label>Gender</Label>
-                    <Input placeholder="Enter your name" />
+                    <Input  value = {formdata.gender} 
+                     onValueChage ={(e) => {
+                       setFormdata({
+                        ...formdata , gender : e.target.value
+                       })
+                     }} name="Gender" type="text" />
                   </TextField>
                    
-                  <TextField defaultValue= {Data.phone} className="w-full" name="Phone" type="tel" isRequired>
+                  <TextField  className="w-full" >
                     <Label>Phone</Label>
-                    <Input placeholder="Enter your phone number" />
+                    <Input  value = {formdata.phone} 
+                     onValueChage ={(e) => {
+                       setFormdata({
+                        ...formdata , phone : e.target.value
+                       })
+                     }}  name="Phone" type="tel" />
                   </TextField>
 
-                   <TextField defaultValue = {Data.date}  name="Date" type="date" isRequired>
+                   <TextField    >
                   <Label>Appointment Date</Label>
-                  <Input type="date" className="rounded-2xl" />
+                  <Input  value = {formdata.date} 
+                     onValueChage ={(e) => {
+                       setFormdata({
+                        ...formdata , date : e.target.value
+                       })
+                     }} name="Date" type="date" className="rounded-2xl" />
                   <FieldError />
                 </TextField>
                   
-                   <TextField defaultValue = {Data.time} name="Time" isRequired>
+                   <TextField   >
                   <Label>Appointment Time</Label>
-                  <Input className="rounded-2xl" />
+                  <Input  value = {formdata.time} 
+                     onValueChage ={(e) => {
+                       setFormdata({
+                        ...formdata , time : e.target.value
+                       })
+                     }} name="Time" className="rounded-2xl" />
                   <FieldError />
                 </TextField>
                    <Modal.Footer>

@@ -3,6 +3,7 @@
 import {AlertDialog, Button} from "@heroui/react";
 import { redirect } from "next/navigation";
 import { AiOutlineDelete } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 export function DeleteBooking ({Data}) {
   const {_id} = Data
@@ -15,6 +16,9 @@ export function DeleteBooking ({Data}) {
         }
       })
       const Data = await res.json()
+      if(Data){
+        toast.warning('“Appointment deleted successfully!”')
+      }
       console.log(Data)
       redirect('/')
     }

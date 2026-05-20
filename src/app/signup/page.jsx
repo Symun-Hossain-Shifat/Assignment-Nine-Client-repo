@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import { FaEnvelope, FaGoogle, FaLock, FaUser } from 'react-icons/fa'
 import { PiBracketsCurlyBold } from 'react-icons/pi'
+import { toast } from 'react-toastify'
 
 
 function Signuppage () {
@@ -32,10 +33,10 @@ function Signuppage () {
 });
 
 if(data){
-  alert(`Registration Successfull`)
+ 
   router.push('/signin')
 }else if (error){
-  alert(`Registration Failed ${error}`)
+  toast.warning(`Registration Failed ! ${error.message}`)
 }
   }
 
@@ -46,10 +47,10 @@ if(data){
   });
 
   if(data){
-  alert(`Registration Successfull`)
+  
   router.push('/signin')
 }else{
-  alert(`Registration Failed`)
+  toast.warning(`Registration Failed !`)
 }
   }
   return (

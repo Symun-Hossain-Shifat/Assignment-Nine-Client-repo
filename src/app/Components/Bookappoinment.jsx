@@ -5,6 +5,7 @@ import { authClient } from "@/lib/auth-client";
 import {Button, FieldError, Input,  Modal, Surface, TextField} from "@heroui/react";
 import {Label} from "@heroui/react";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
 export function WithForm({Data}) {
   // console.log(Data)
 
@@ -38,6 +39,11 @@ console.log(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings`)
   })
   const Data = await res.json();
   console.log(Data)
+
+  if(Data){
+    toast.success('“Appointment booked successfully!”')
+
+  }
   }
 
   return (
