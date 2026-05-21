@@ -76,7 +76,7 @@ if(data){
         {/* Heading */}
         <div className="text-center mb-6">
           <h1 className="text-3xl sm:text-4xl font-bold text-black">
-            Welcome Back
+            Login
           </h1>
          
         </div>
@@ -147,7 +147,7 @@ if(data){
           </div>
 
           {/* Google */}
-          <button onClick={Googlesignin} className="w-full border py-2.5 rounded-md flex items-center justify-center gap-2 hover:bg-gray-50 transition">
+          <button type='button' onClick={Googlesignin} className="w-full border py-2.5 rounded-md flex items-center justify-center gap-2 hover:bg-gray-50 transition">
             <FaGoogle className="text-red-500" />
             <span className="text-sm">Sign Up With Google</span>
           </button>

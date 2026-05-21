@@ -7,8 +7,10 @@ import {Label} from "@heroui/react";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { TbBrandBooking } from "react-icons/tb";
 import { toast } from "react-toastify";
-export function WithForm({Data}) {
-  console.log(Data)
+export  function WithForm({Data}) {
+  // console.log(Data)
+
+  
 
   
   const { data: session } = authClient.useSession()
@@ -18,10 +20,10 @@ export function WithForm({Data}) {
 
   const Getbookingdata =  async (e) => {
   e.preventDefault()
-
+  
   const FormData = e.target
   const email = FormData.Email.value
-  const doctorname = FormData.Doctor.value 
+  const doctorname = FormData.Doctor.value
   const patientname = FormData.Patient.value 
   const phone = FormData.Phone.value
   const gender = FormData.Gender.value 
@@ -29,12 +31,15 @@ export function WithForm({Data}) {
   const time = FormData.Time.value
   const BookingData = {email , doctorname , patientname , phone , gender , date , time }
   // console.log(BookingData)
-console.log(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings`)
+// console.log(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings`)
 
+const {data : tokendata } = await authClient.token() 
+console.log(tokendata)
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings` , {
     method : 'POST', 
     headers : {
-      'content-type' : 'application/json'
+      'content-type' : 'application/json',
+      authorization : `Bearer ${tokendata?.token}`
     },
     body : JSON.stringify(BookingData)
   })

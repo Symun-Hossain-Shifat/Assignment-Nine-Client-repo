@@ -24,12 +24,11 @@ async function Dashboardpage () {
  const email = session?.user?.email 
  console.log(email)
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings?email=${email}`,{
-      cache : 'no-store'
-    } , {
-          headers : {
+      cache : 'no-store' ,
+      headers : {
             authorization : `Bearer ${token}`
           }
-        })
+    } )
     const Datas = await res.json()
     // console.log(Datas)
     
@@ -39,8 +38,11 @@ async function Dashboardpage () {
     <div className=' w-11/12 md:w-10/12 mx-auto p-3 my-20'>
       
         <h1 className='text-3xl text-left font-semibold my-5'>My Bookings</h1>
-          <div className= {`${Datas.length < 1? '' : 'grid grid-cols-1 md:grid-cols-2 gap-4 p-5'} `}>
-            {Datas.length < 1? (<h1 className='text-center py-20 text-3xl font-bold'>No Booking Found</h1>) :  ( Datas.map( Data => (
+          <div className= {`${Datas.length > 0 ? 'grid grid-cols-1 md:grid-cols-2 gap-4 p-5' : ''} `}>
+
+
+            {Array.isArray(Datas)? (
+              Datas.length < 1? (<h1 className='text-center py-20 text-3xl font-bold'>No Booking Found</h1>) :  ( Datas.map( Data => (
                  <div className='card' key={Data._id}>
                            {/* Header */}
                            <div className='flex gap-2.5 border-b-2 border-gray-200 py-5'>
@@ -95,7 +97,11 @@ async function Dashboardpage () {
                         <UpdateBooking Data = {Data} ></UpdateBooking>
                       </div>
                  </div>
-            ))) }
+            ))) 
+            ) : (<h1 className='text-2xl font-semibold'>
+              Loading.......
+            </h1>)}
+           
           </div>
         
             

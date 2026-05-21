@@ -75,7 +75,7 @@ if(data){
 
   if(data){
   
-  router.push('/signin')
+  router.push('/')
 }else{
   toast.warning(`Registration Failed !`)
 }
@@ -88,7 +88,7 @@ if(data){
         {/* Heading */}
         <div className="text-center mb-6">
           <h1 className="text-3xl sm:text-4xl font-semibold text-black">
-            Create Account
+            Register
           </h1>
          
         </div>

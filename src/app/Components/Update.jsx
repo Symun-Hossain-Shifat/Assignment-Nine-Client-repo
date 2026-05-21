@@ -60,12 +60,13 @@ export function UpdateBooking ({Data}) {
   const time = FormData.Time.value
   const BookingData = {email , doctorname , patientname , phone , gender , date , time }
   
-  
+  const {data : tokendata } = await authClient.token() 
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings/${Data._id}` , {
     method : 'PATCH',
     headers : {
-        'content-type' : 'application/json'
+        'content-type' : 'application/json' ,
+         authorization : `Bearer ${tokendata?.token}`
     },
     body : JSON.stringify(BookingData)
   })

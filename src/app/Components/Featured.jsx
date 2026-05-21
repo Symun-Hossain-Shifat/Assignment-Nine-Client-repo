@@ -24,94 +24,30 @@ console.log(Datas)
             <img
               src={Data.image}
               alt="Doctor Picture"
-             className=' w-80 mx-auto md:w-100 object-cover '
+             className=' w-80 h-80 mx-auto md:w-100 object-cover '
               
               />
           </figure>
         
         
         
-          <div className="my-auto p-5">
+          <div className="my-auto p-5 ">
+            <div>
             <h2 className=" text-3xl font-semibold">{Data.name}</h2>
             <p className='font-semibold text-blue-800'>{Data.specialty}</p>
           
             <p className='font-semibold'>About Doctor : <br />  <span className='font-normal text-gray-700'>{Data.description}</span></p>
           
-            <div className='grid grid-cols-2 gap-5'>
-                <div className='flex gap-2 items-center p-2 rounded-xl'>
-                    <div className='text-red-700'>
-                        <FaUser size={40} />
-                    </div>
-                    <div>
-                        <h1 className='font-semibold'>Experience </h1>
-                        <p>{Data.experience}</p>
-                    </div>
-                </div>
-                <div className='flex gap-2 items-center p-2 rounded-xl'>
-                    <div className='text-green-700'>
-                        <PiHospital size={40} />
-                    </div>
-                    <div>
-                        <h1 className='font-semibold'>Hospital</h1>
-                        <p>{Data.hospital}</p>
-                    </div>
-                </div>
-                <div className='flex gap-2 items-center p-2 rounded-xl'>
-                    <div className='text-blue-700'>
-                        <IoLocationSharp size={40} />
-                    </div>
-                    <div>
-                        <h1 className='font-semibold'>Location</h1>
-                        <p>{Data.location}</p>
-                    </div>
-                </div>
-                <div className='flex gap-2 items-center p-2 rounded-xl'>
-                    <div className='text-yellow-700'>
-                        <MdOutlineAttachMoney  size={40} />
-                    </div>
-                    <div>
-                        <h1 className='font-semibold'>Fee</h1>
-                        <p>$ {Data.fee}</p>
-                    </div>
-                </div>
-                <div className='flex gap-2 items-center p-2 rounded-xl'>
-                    <div className='text-pink-700'>
-                        <SlCalender size={40} />
-                    </div>
-                    <div>
-                        <h1 className='font-semibold'>Availability</h1>
-                        <div>
-                            {Data.availability.map((D , index) => (
-                    <div  key={index} className='flex '>
-                          <p> {D} <br /> </p> <br />
-                     </div>
-                    
-                  
-                ))}
-                        </div>
-                       
-                    </div>
-                </div>
-               
             </div>
+            
+            
           
           <Link  href={`/allappoinment/${Data._id}`}>
       <button className='btn my-5 btn-primary'>Veiw Details</button>
       </Link>
           
           
-         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-          </div>
+</div>
         </div>
       ))}
     </div>

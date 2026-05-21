@@ -1,21 +1,47 @@
-
+'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaAnglesRight } from 'react-icons/fa6'
+import {Label, SearchField} from "@heroui/react";
 
-async function Allappoinmentpage () {
+function Allappoinmentpage () {
 
+const [data, setData] = useState([])
+const [search , setSearch] = useState('')
+ 
+useEffect(  () => { 
 
-
-const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allappoinmets`)
+  const fetchdata =  async () => {
+   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allappoinmets`)
 const Datas = await res.json()
 // console.log(Datas)
+setData(Datas)
+  };
+  fetchdata()
+ 
+} , [])
+
+const filterdata = data.filter( (Doctor) => 
+  Doctor.name.toLowerCase().includes(search.toLowerCase())
+)
+
   return (
     <div className=' py-10 w-8/10  mx-auto md:w-10/12'>
+
+      <div>
+        <SearchField value= {search} onChange={setSearch} className= 'w-5/10 mb-5  mx-auto '>
+   
+      <SearchField.Group>
+        <SearchField.SearchIcon />
+        <SearchField.Input  placeholder="Search..." />
+        <SearchField.ClearButton />
+      </SearchField.Group>
+    </SearchField> 
+      </div>
        <h2 className='text-2xl font-semibold'>All Appoinments</h2> 
        <div className='grid grid-cols-1 md:grid-cols-3 my-10 gap-5'>
           {
-          Datas.map(Data => (
+         filterdata.map(Data => (
             <div key={Data._id} className="card  bg-base-100   shadow-sm">
   <figure>
     <img
