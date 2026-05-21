@@ -5,9 +5,10 @@ import { authClient } from "@/lib/auth-client";
 import {Button, FieldError, Input,  Modal, Surface, TextField} from "@heroui/react";
 import {Label} from "@heroui/react";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import { TbBrandBooking } from "react-icons/tb";
 import { toast } from "react-toastify";
 export function WithForm({Data}) {
-  // console.log(Data)
+  console.log(Data)
 
   
   const { data: session } = authClient.useSession()
@@ -48,7 +49,7 @@ console.log(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings`)
 
   return (
     <Modal>
-      <Button className='rounded-none my-3 ' variant="outline">Book Appointment Now</Button>
+      <Button className='rounded-none w-full  mt-5 flex items-center gap-3' variant="outline"> <TbBrandBooking /> Book Appointment Now</Button>
       <Modal.Backdrop
       className="bg-linear-to-t from-black/80 via-black/40 to-transparent dark:from-zinc-800/80 dark:via-zinc-800/40"
         variant="blur">

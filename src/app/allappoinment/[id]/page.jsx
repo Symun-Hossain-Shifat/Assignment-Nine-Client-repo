@@ -1,5 +1,7 @@
 
 import { WithForm } from '@/app/Components/Bookappoinment'
+import { auth } from '@/lib/auth'
+import { headers } from 'next/headers'
 import Link from 'next/link'
 import React from 'react'
 import { FaUser } from 'react-icons/fa'
@@ -11,10 +13,16 @@ import { SlCalender } from 'react-icons/sl'
 
 async function Detailspage ({params}) {
     const {id} = await params
-    
+    const {token} = await  auth.api.getToken ({
+      headers : await headers()
+    })
 
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allappoinmets/${id}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allappoinmets/${id} `, {
+      headers : {
+        authorization : `Bearer ${token}`
+      }
+    })
     const Data = await res.json()
     const time = Data.availability
     // console.log(Data)

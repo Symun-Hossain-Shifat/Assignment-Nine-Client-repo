@@ -19,7 +19,7 @@ export function UpdateBooking ({Data}) {
   const { data: session } = authClient.useSession()
   const UserInfo = session?.user
   // console.log(UserInfo)
- console.log(Data)
+//  console.log(Data)
 
  
   const [formdata , setFormdata] = useState({

@@ -1,3 +1,4 @@
+
 import Link from 'next/link'
 import React from 'react'
 import { FaUser } from 'react-icons/fa'
@@ -7,9 +8,10 @@ import { PiHospital } from 'react-icons/pi'
 import { SlCalender } from 'react-icons/sl'
 
 async function Featuredpage () {
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/featured`)
 const Datas = await res.json()
-// console.log(Datas)
+console.log(Datas)
   return (
     <div  className='container mx-auto text-center '>
     <div className='text-center mb-8 space-y-4 w-10/12 mx-auto'>

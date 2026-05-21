@@ -1,19 +1,13 @@
-import { auth } from '@/lib/auth'
-import { headers } from 'next/headers'
+
 import Link from 'next/link'
 import React from 'react'
+import { FaAnglesRight } from 'react-icons/fa6'
 
 async function Allappoinmentpage () {
-const {token} = await  auth.api.getToken ({
-  headers : await headers()
-})
 
-console.log(token)
-const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allappoinmets` , {
-  headers : {
-    authorization : `Bearer ${token}`
-  }
-})
+
+
+const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allappoinmets`)
 const Datas = await res.json()
 // console.log(Datas)
   return (
@@ -38,8 +32,8 @@ const Datas = await res.json()
      <p className="font-semibold text-gray-700">{Data.specialty}</p>
     <p>{Data.description}</p>
     <div className="card-actions justify-end">
-      <Link href={`/allappoinment/${Data._id}`}>
-      <button className='btn btn-primary'>Veiw Details</button>
+      <Link href={`/allappoinment/${Data._id}`} className='w-full mt-5'>
+      <button  className='btn w-3/5 mx-auto  btn-primary flex items-center gap-3'>Veiw Details <FaAnglesRight /></button>
       </Link>
       
     </div>

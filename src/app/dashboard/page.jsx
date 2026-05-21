@@ -6,12 +6,30 @@ import React from 'react'
 import { DeleteBooking } from '../Components/DeleteBooking'
 
 import { UpdateBooking } from '../Components/Update'
+import { authClient } from '@/lib/auth-client'
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+
 
 
 async function Dashboardpage () {
 
+   const {token} = await  auth.api.getToken ({
+        headers : await headers()
+      })
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings`)
+ const session  = await auth.api.getSession({
+  headers : await headers()
+ });
+ const email = session?.user?.email 
+ console.log(email)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings?email=${email}`,{
+      cache : 'no-store'
+    } , {
+          headers : {
+            authorization : `Bearer ${token}`
+          }
+        })
     const Datas = await res.json()
     // console.log(Datas)
     
