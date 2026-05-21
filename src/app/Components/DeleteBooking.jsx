@@ -13,7 +13,7 @@ export function DeleteBooking ({Data}) {
        const {data : tokendata } = await authClient.token() 
 
 
-      const res = await  fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings/${_id}` , {
+      const res = await  fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allbookings/${_id}` , {
         method : 'DELETE',
         headers : {
 

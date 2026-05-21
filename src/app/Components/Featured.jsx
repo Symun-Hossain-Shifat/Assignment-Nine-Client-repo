@@ -1,15 +1,10 @@
 
 import Link from 'next/link'
 import React from 'react'
-import { FaUser } from 'react-icons/fa'
-import { IoLocationSharp } from 'react-icons/io5'
-import { MdOutlineAttachMoney } from 'react-icons/md'
-import { PiHospital } from 'react-icons/pi'
-import { SlCalender } from 'react-icons/sl'
 
 async function Featuredpage () {
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/featured`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured`)
 const Datas = await res.json()
 console.log(Datas)
   return (

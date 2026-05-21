@@ -35,7 +35,7 @@ export  function WithForm({Data}) {
 
 const {data : tokendata } = await authClient.token() 
 console.log(tokendata)
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings` , {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allbookings` , {
     method : 'POST', 
     headers : {
       'content-type' : 'application/json',

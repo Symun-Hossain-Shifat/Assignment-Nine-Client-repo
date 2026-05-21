@@ -62,7 +62,7 @@ export function UpdateBooking ({Data}) {
   
   const {data : tokendata } = await authClient.token() 
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings/${Data._id}` , {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allbookings/${Data._id}` , {
     method : 'PATCH',
     headers : {
         'content-type' : 'application/json' ,
