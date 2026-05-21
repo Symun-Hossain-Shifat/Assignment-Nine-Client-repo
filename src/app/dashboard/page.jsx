@@ -17,23 +17,32 @@ async function Dashboardpage () {
    const {token} = await  auth.api.getToken ({
         headers : await headers()
       })
+if (!token) {
+  return <h1>Please login again</h1>;
+}
+const session = await auth.api.getSession({
+  headers: await headers()
+});
 
- const session  = await auth.api.getSession({
-  headers : await headers()
- });
- const email = session?.user?.email 
- console.log(email)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings?email=${email}`,{
-      cache : 'no-store' ,
-      headers : {
-            authorization : `Bearer ${token}`
-          }
-    } )
-    const Datas = await res.json()
-    // console.log(Datas)
-    
+if (!session?.user?.email) {
+  return <h1 className="text-center text-2xl">Please login first</h1>;
+}
 
-   
+const email = session.user.email;
+ const res = await fetch(
+  `${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings?email=${email}`,
+  {
+    cache: 'no-store',
+    headers: {
+      authorization: `Bearer ${token || ''}`
+    }
+  }
+);
+
+if (!res.ok) {
+  return <h1>Failed to load bookings</h1>;
+}
+   const Datas = await res.json()
   return (
     <div className=' w-11/12 md:w-10/12 mx-auto p-3 my-20'>
       
