@@ -30,7 +30,7 @@ if (!session?.user?.email) {
 
 const email = session.user.email;
  const res = await fetch(
-  `${process.env.NEXT_PUBLIC_SERVER_PORT}/allbookings?email=${email}`,
+  `${process.env.NEXT_PUBLIC_SERVER_URL}/allbookings?email=${email}`,
   {
     cache: 'no-store',
     headers: {
