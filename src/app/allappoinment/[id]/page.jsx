@@ -18,7 +18,7 @@ async function Detailspage ({params}) {
     })
 
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allappoinmets/${id} `, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allappointments/${id} `, {
       headers : {
         authorization : `Bearer ${token}`
       }

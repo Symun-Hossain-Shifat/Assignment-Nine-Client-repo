@@ -12,7 +12,7 @@ const [search , setSearch] = useState('')
 useEffect(  () => { 
 
   const fetchdata =  async () => {
-   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allappoinmets`)
+   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allappointments`)
 const Datas = await res.json()
 // console.log(Datas)
 setData(Datas)
